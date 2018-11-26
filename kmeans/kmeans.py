@@ -38,7 +38,8 @@ class Kmeans_img:
         Sum of squared distances of samples to their closest cluster center.
 
     """
-    def __init__(self, n_clusters, max_iter = 100, tol=10**(-5), init = "random", n_init = 1,seed=7):
+    def __init__(self, n_clusters = 8, max_iter = 100, tol=10**(-5), init = "random", n_init = 1,seed=7):
+        assert isinstance(n_clusters,int), "Enter an Integer for the number of clusters like 5."
         self.n_clusters = n_clusters
         self.max_iter = max_iter
         self.tol= tol
@@ -178,6 +179,7 @@ class Kmeans_img:
         reshaped_df = pd.DataFrame(data_reshaped)
 
         return reshaped_df
+
     @staticmethod
     def from_pd_to_img(data,img):
         # get the data values from pandas dataframe
@@ -190,3 +192,11 @@ class Kmeans_img:
         img = Image.fromarray(img_unit8)
 
         return img
+
+    def __repr__(self):
+        string = "Kmeans_img(n_clusters = {}, max_iter = {}, tol={}, init = '{}', n_init = {}, seed={})".format(self.n_clusters,
+                                                                                                            self.max_iter,
+                                                                                                           self.tol,
+                                                                                                           self.init,
+                                                                                                           self.n_init,self.seed)
+        return string
